@@ -42,7 +42,6 @@ function createAddWindow() {
         height: 200,
         title: 'Add Shopping List Item'
     });
-    
 
     // Load html into window
     addWindow.loadURL(url.format({
@@ -51,11 +50,11 @@ function createAddWindow() {
         slashes: true
     }));
 
-    // Build Menu from template
-    const mainMenu = Menu.buildFromTemplate(mainWindowTemplate);
+    // Garbage collection handle
+    addWindow.on('close', function () {
+        addWindow = null;
+    });
 
-    // insert menu
-    Menu.setApplicationMenu(mainMenu);
 }
 
 
