@@ -6,6 +6,7 @@ const path = require('path');
 const { app, BrowserWindow, Menu } = electron;
 
 let mainWindow;
+let addWindow;
 
 // Listen for the app to be ready 
 app.on('ready', function () {
@@ -28,6 +29,29 @@ app.on('ready', function () {
 
 });
 
+// Handle create add window
+function createAddWindow() {
+    // create new window
+    addWindow = new BrowserWindow({
+        width: 200,
+        height: 200,
+        title: 'Add Shopping List Item'
+    });
+
+    // Load html into window
+    addWindow.loadURL(url.format({
+        pathname: path.join(__dirname, 'addWindow.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
+
+    // Build Menu from template
+    const mainMenu = Menu.buildFromTemplate(addWindowTemplate);
+
+    // insert menu
+    Menu.setApplicationMenu(mainMenu);
+}
+
 
 //  Create menu Template
 const mainWindowTemplate = [
@@ -35,7 +59,10 @@ const mainWindowTemplate = [
         label: 'File',
         submenu: [
             {
-                label: 'Add Item'
+                label: 'Add Item',
+                click() {
+                    createAddWindow();
+                }
             },
             {
                 label: 'Clear Item'
