@@ -27,7 +27,7 @@ app.on('ready', function () {
     });
 
     // Build Menu from template
-    const mainMenu = Menu.buildFromTemplate(mainWindowTemplate);
+    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
 
     // insert menu
     Menu.setApplicationMenu(mainMenu);
@@ -59,7 +59,7 @@ function createAddWindow() {
 
 
 //  Create menu Template
-const mainWindowTemplate = [
+const mainMenuTemplate = [
     {
         label: 'File',
         submenu: [
@@ -85,5 +85,24 @@ const mainWindowTemplate = [
 
 // if mac, add empty object to menu
 if (process.platform == 'darwin') {
-    mainWindowTemplate.unshift({});
+    mainMenuTemplate.unshift({});
+}
+
+// Add developer tools item if not in prod
+if (process.env.NODE_ENV != 'production') {
+    mainMenuTemplate.push({
+        label: 'Developer Tools',
+        submenu: [
+            {
+                label: 'Toggle DevTools',
+                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+                click(item, focussedWindow) {
+                    focussedWindow.toggleDevTools();
+                }
+            },
+            {
+                role: 'reload'
+            }
+        ]
+    })
 }
