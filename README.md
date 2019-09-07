@@ -1,7 +1,3 @@
-# Shopping List 
-A cross platform shopping list application for mac, windows and linux using web-technology like HTML, CSS, and JavaScript. Electron accomplishes this by combining Chromium and Node.js into a single runtime and apps can be packaged for Mac, Windows, and Linux.
-
-
 # Shopping List
 
 A cross platform shopping list application for mac, windows and linux using web-technology like HTML, CSS, and JavaScript. Electron accomplishes this by combining Chromium and Node.js into a single runtime and apps can be packaged for Mac, Windows, and Linux.
