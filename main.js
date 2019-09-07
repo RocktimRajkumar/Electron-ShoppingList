@@ -12,7 +12,11 @@ let addWindow;
 app.on('ready', function () {
 
     // create new window
-    mainWindow = new BrowserWindow({});
+    mainWindow = new BrowserWindow({
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
 
     // Load html into window
     mainWindow.loadURL(url.format({
@@ -62,7 +66,6 @@ function createAddWindow() {
 
 // catch item:add
 ipcMain.on('item:add', function (e, item) {
-    console.log(item);
     mainWindow.webContents.send('item:add', item);
     addWindow.close();
 });
